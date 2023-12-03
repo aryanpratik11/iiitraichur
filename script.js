@@ -292,10 +292,13 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initial check
     updateHeader();
 
+    
     function updateHeader() {
         var rect = videoSection.getBoundingClientRect();
-        if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
-            // Header is in the viewport
+        var navHeight = header.offsetHeight; // Get the height of the navbar
+    
+        if (rect.top <= window.innerHeight - navHeight && rect.bottom >= navHeight) {
+            // Header is in the viewport, taking into account the navbar height
             header.style.background = 'linear-gradient(90deg, whitesmoke 10%, transparent 90%)';
             logo.src = originalImageSrc;
         } else {
@@ -304,6 +307,7 @@ document.addEventListener('DOMContentLoaded', function () {
             logo.src = scrolledImageSrc;
         }
     }
+    
 
     window.addEventListener('scroll', updateHeader);
     window.addEventListener('resize', updateHeader);
